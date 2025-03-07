@@ -6,12 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "npx @puppeteer/browsers install chrome@stable"
   },
   "dependencies": {
+    "@sparticuz/chromium-min": "^133.0.0",
     "mongodb": "^6.14.2",
     "next": "15.2.0",
     "puppeteer": "^24.4.0",
+    "puppeteer-core": "^24.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

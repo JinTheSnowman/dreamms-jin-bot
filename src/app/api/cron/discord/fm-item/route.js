@@ -1,5 +1,4 @@
-// dreamms-jin-bot/src/app/api/cron/discordQuery/route.js
-import { launch } from "puppeteer";
+import browser from "../../../../../../lib/browser";
 import client from "../../../../../../lib/mongodb";
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
@@ -12,10 +11,6 @@ export async function GET(request) {
   const queryString = QUERIES[cycleIndex];
 
   try {
-    console.log("Launching Puppeteer browser...");
-    const browser = await launch({
-      headless: "new",
-    });
     const page = await browser.newPage();
     const discordToken = process.env.DISCORD_TOKEN;
 
