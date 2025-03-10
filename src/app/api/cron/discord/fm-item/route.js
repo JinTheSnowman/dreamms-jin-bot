@@ -7,7 +7,7 @@ import chromium from "@sparticuz/chromium-min";
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 const FREQUENCY = 5;
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 // https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar
 
