@@ -6,6 +6,7 @@ import chromium from "@sparticuz/chromium-min";
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 
+export const maxDuration = 120;
 // https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar
 
 async function getBrowser() {
