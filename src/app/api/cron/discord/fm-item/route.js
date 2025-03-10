@@ -1,8 +1,27 @@
-import browser from "../../../../../../lib/browser";
 import client from "../../../../../../lib/mongodb";
+
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium-min";
+
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 const FREQUENCY = 5;
+
+// https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar
+
+async function getBrowser() {
+  const executablePath = await chromium.executablePath(
+    "https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar"
+  )
+
+  return puppeteer.launch({
+    executablePath,
+    args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+    defaultViewport: chromium.defaultViewport,
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
+  });
+}
 
 export async function GET(request) {
   // Calculate the index based on the current time.
@@ -11,6 +30,9 @@ export async function GET(request) {
   const queryString = QUERIES[cycleIndex];
 
   try {
+
+    const browser = await getBrowser()
+
     const page = await browser.newPage();
     const discordToken = process.env.DISCORD_TOKEN;
 

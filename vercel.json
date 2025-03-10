@@ -4,6 +4,5 @@
       "path": "/api/cron/discord/fm-item",
       "schedule": "*/5 * * * *"
     }
-  ],
-  "buildCommand": "npm run postinstall && next build"
+  ]
 }

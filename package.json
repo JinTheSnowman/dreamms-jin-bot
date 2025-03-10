@@ -6,11 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "node node_modules/puppeteer/install.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@sparticuz/chromium": "^133.0.0",
     "@sparticuz/chromium-min": "^133.0.0",
     "mongodb": "^6.14.2",
     "next": "15.2.0",
