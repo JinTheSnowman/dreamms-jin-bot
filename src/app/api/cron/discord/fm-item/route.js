@@ -3,9 +3,11 @@ import browser from "../../../../../../lib/browser";
 
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
-const FREQUENCY = 5;
+const FREQUENCY = 10;
 
 export const maxDuration = 300;
+
+let page;
 
 export async function GET(request) {
   // Calculate the index based on the current time.
@@ -14,7 +16,7 @@ export async function GET(request) {
   const queryString = QUERIES[cycleIndex];
 
   try {
-    const page = await browser.newPage();
+    page = await browser.newPage();
     const discordToken = process.env.DISCORD_TOKEN;
 
     await page.evaluateOnNewDocument(() => {
@@ -97,6 +99,11 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error("Error in Discord query:", error);
+
+    if (page) {
+      console.error(await page.content());
+    }
+
     return new Response(JSON.stringify({ success: false, error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
