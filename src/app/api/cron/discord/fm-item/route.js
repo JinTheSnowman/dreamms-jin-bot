@@ -30,7 +30,7 @@ export async function GET(request) {
 
     console.log("Redirecting to Discord...");
     await page.goto("https://discord.com/app");
-    
+
     console.log(await page.screenshot({ encoding: "base64", fullPage: true }))
 
     await page.evaluate((token) => {
@@ -40,7 +40,7 @@ export async function GET(request) {
 
     await page.goto("https://discord.com/channels/@me/1264454944354734100");
 
-    await page.waitForSelector('[role="textbox"]', { timeout: 120000 });
+    await page.waitForSelector('[role="textbox"]', { timeout: 6000 });
     console.log("Successfully logged in...");
 
     console.log("Sending query...");
