@@ -35,12 +35,12 @@ export async function GET(request) {
       localStorage.setItem("token", `"${token}"`);
     }, discordToken);
 
+    console.log(await page.screenshot({ encoding: "base64", fullPage: true }))
+
     await page.goto("https://discord.com/channels/@me/1264454944354734100");
 
     await page.waitForSelector('[role="textbox"]', { timeout: 120000 });
     console.log("Successfully logged in...");
-
-    throw new Error;
 
     console.log("Sending query...");
     await page.type('[role="textbox"][contenteditable="true"]', '/fm item');
@@ -103,9 +103,7 @@ export async function GET(request) {
     console.error("Error in Discord query:", error);
 
     if (page) {
-      console.error(await page.screenshot({ encoding: "base64" }));
-      const text = await page.screenshot({ encoding: "base64" });
-      fs.writeFileSync("tmp/screenshot-base64.txt", text);
+      console.error(await page.screenshot({ encoding: "base64", fullPage: true }))
     }
 
     return new Response(JSON.stringify({ success: false, error: error.message }), {
