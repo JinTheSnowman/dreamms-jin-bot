@@ -104,7 +104,13 @@ export async function GET(request) {
     console.error("Error in Discord query:", error);
 
     if (page) {
-      console.error(await page.screenshot({ encoding: "base64", fullPage: true }))
+      const screenshot = await page.screenshot({ encoding: "base64", fullPage: true })
+      console.error(screenshot)
+
+      return new Response(JSON.stringify({ success: false, error: error.message + "\n" + screenshot }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     return new Response(JSON.stringify({ success: false, error: error.message }), {
