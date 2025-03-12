@@ -1,6 +1,6 @@
 import client from "../../../../../../lib/mongodb";
 import browser from "../../../../../../lib/browser";
-
+import fs from 'fs';
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 const FREQUENCY = 10;
@@ -39,6 +39,8 @@ export async function GET(request) {
 
     await page.waitForSelector('[role="textbox"]', { timeout: 120000 });
     console.log("Successfully logged in...");
+
+    throw new Error;
 
     console.log("Sending query...");
     await page.type('[role="textbox"][contenteditable="true"]', '/fm item');
@@ -102,7 +104,8 @@ export async function GET(request) {
 
     if (page) {
       console.error(await page.screenshot({ encoding: "base64" }));
-
+      const text = await page.screenshot({ encoding: "base64" });
+      fs.writeFileSync("tmp/screenshot-base64.txt", text);
     }
 
     return new Response(JSON.stringify({ success: false, error: error.message }), {
