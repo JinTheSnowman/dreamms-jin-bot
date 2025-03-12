@@ -88,7 +88,7 @@ export async function GET(request) {
 
     console.log("Data extracted:", data);
 
-    const db = client.db(process.env.DB_NAME);
+    const db = await client.db(process.env.DB_NAME);
     await db.collection('listings').insertOne(data);
 
     await browser.close();
@@ -101,7 +101,8 @@ export async function GET(request) {
     console.error("Error in Discord query:", error);
 
     if (page) {
-      console.error(await page.content());
+      console.error(await page.screenshot({ encoding: "base64" }));
+
     }
 
     return new Response(JSON.stringify({ success: false, error: error.message }), {
