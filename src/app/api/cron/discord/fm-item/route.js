@@ -31,7 +31,7 @@ export async function GET(request) {
     console.log("Redirecting to Discord...");
     await page.goto("https://discord.com/app");
 
-    console.log(await page.screenshot({ encoding: "base64", fullPage: true }))
+    // console.log(await page.screenshot({ encoding: "base64", fullPage: true }))
 
     await page.evaluate((token) => {
       localStorage.setItem("token", `"${token}"`);
