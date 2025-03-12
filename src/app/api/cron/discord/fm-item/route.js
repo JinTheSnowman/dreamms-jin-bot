@@ -1,29 +1,11 @@
 import client from "../../../../../../lib/mongodb";
-
-import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium-min";
+import browser from "../../../../../../lib/browser";
 
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 const FREQUENCY = 5;
 
 export const maxDuration = 300;
-
-// https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar
-
-async function getBrowser() {
-  const executablePath = await chromium.executablePath(
-    "https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar"
-  )
-
-  return puppeteer.launch({
-    executablePath,
-    args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
-    defaultViewport: chromium.defaultViewport,
-    headless: chromium.headless,
-    ignoreHTTPSErrors: true,
-  });
-}
 
 export async function GET(request) {
   // Calculate the index based on the current time.
@@ -32,9 +14,6 @@ export async function GET(request) {
   const queryString = QUERIES[cycleIndex];
 
   try {
-
-    const browser = await getBrowser()
-
     const page = await browser.newPage();
     const discordToken = process.env.DISCORD_TOKEN;
 
@@ -55,9 +34,9 @@ export async function GET(request) {
     }, discordToken);
 
     await page.goto("https://discord.com/channels/@me/1264454944354734100");
-    console.log("Successfully logged in...");
 
     await page.waitForSelector('[role="textbox"]', { timeout: 120000 });
+    console.log("Successfully logged in...");
 
     console.log("Sending query...");
     await page.type('[role="textbox"][contenteditable="true"]', '/fm item');
