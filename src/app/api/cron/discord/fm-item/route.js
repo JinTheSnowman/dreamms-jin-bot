@@ -139,7 +139,7 @@ export async function GET(request) {
     console.log("Data extracted:", data);
 
     const db = await client.db(process.env.DB_NAME);
-    await db.collection("listings").insertOne(data);
+    await db.collection("listing_snapshots").insertOne(data);
 
     await browser.close();
 
