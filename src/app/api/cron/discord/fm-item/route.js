@@ -42,7 +42,7 @@ export async function GET(request) {
 
     await page.goto(DISCORD_URL, { timeout: 60000 });
 
-    await page.waitForSelector('[role="textbox"]', { timeout: 180000 });
+    await page.waitForSelector('[role="textbox"]', { timeout: 30000 });
     console.log("Successfully logged in...");
 
     console.log("Sending query...");
