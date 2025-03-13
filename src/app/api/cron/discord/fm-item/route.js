@@ -1,6 +1,9 @@
+import chromium from "@sparticuz/chromium-min";
+import puppeteerCore from "puppeteer-core";
+import puppeteer from "puppeteer";
+
 import client from "../../../../../../lib/mongodb";
-import browser from "../../../../../../lib/browser";
-import fs from "fs";
+import { CHROMIUM_ARGS } from "../../../../../../lib/browser";
 
 const ITEM_TRACK_LIST = process.env.ITEM_TRACK_LIST || [
   "taru totem",
@@ -12,12 +15,38 @@ const ITEM_TRACK_LIST = process.env.ITEM_TRACK_LIST || [
 ];
 const FREQUENCY = 10;
 
+const CHROMIUM_EXECUTABLE_URL =
+  "https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar";
+
 const DISCORD_URL =
   "https://discord.com/channels/1246521134866890875/1349566765348425770";
 
 export const maxDuration = 300;
 
 let page;
+
+const getBrowser = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return await puppeteer.launch({
+      args: CHROMIUM_ARGS,
+      defaultViewport: chromium.defaultViewport,
+      headless: true,
+      ignoreHTTPSErrors: true,
+    });
+  } else {
+    const executablePath = await chromium.executablePath(
+      CHROMIUM_EXECUTABLE_URL,
+    );
+
+    return await puppeteerCore.launch({
+      executablePath,
+      args: CHROMIUM_ARGS,
+      defaultViewport: chromium.defaultViewport,
+      headless: true,
+      ignoreHTTPSErrors: true,
+    });
+  }
+};
 
 export async function GET(request) {
   // Calculate the index based on the current time.
@@ -27,6 +56,8 @@ export async function GET(request) {
   const queryString = ITEM_TRACK_LIST[cycleIndex];
 
   try {
+    const browser = await getBrowser();
+
     page = await browser.newPage();
     const discordToken = process.env.DISCORD_TOKEN;
 
