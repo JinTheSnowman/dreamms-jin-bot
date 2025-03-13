@@ -4,8 +4,10 @@ import fs from 'fs';
 
 const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
 const FREQUENCY = 10;
+
 // const DISCORD_URL = "https://discord.com/channels/@me/1264454944354734100";s
-const DISCORD_URL = "https://discord.com/channels/@me/1349534535175508018";
+// const DISCORD_URL = "https://discord.com/channels/@me/1349534535175508018";
+const DISCORD_URL = "https://discord.com/channels/@me/1345039358696095875";
 
 export const maxDuration = 300;
 
