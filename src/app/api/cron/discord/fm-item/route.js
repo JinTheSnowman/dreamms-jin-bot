@@ -2,12 +2,9 @@ import client from "../../../../../../lib/mongodb";
 import browser from "../../../../../../lib/browser";
 import fs from 'fs';
 
-const QUERIES = ["taru totem", "stone tiger head", "white scroll"];
+const ITEM_TRACK_LIST = process.env.ITEM_TRACK_LIST ||
+  ["taru totem", "stone tiger head", "white scroll", "chaos scroll", "clean slate scroll 10%", "clean slate scroll 20%"];
 const FREQUENCY = 10;
-
-// const DISCORD_URL = "https://discord.com/channels/@me/1264454944354734100";s
-// const DISCORD_URL = "https://discord.com/channels/@me/1349534535175508018";
-// const DISCORD_URL = "https://discord.com/channels/@me/1345039358696095875";
 
 const DISCORD_URL = "https://discord.com/channels/1246521134866890875/1349566765348425770"
 
@@ -18,8 +15,8 @@ let page;
 export async function GET(request) {
   // Calculate the index based on the current time.
   const currentTime = Date.now();
-  const cycleIndex = Math.floor(currentTime / (FREQUENCY * 60 * 1000)) % QUERIES.length;
-  const queryString = QUERIES[cycleIndex];
+  const cycleIndex = Math.floor(currentTime / (FREQUENCY * 60 * 1000)) % ITEM_TRACK_LIST.length;
+  const queryString = ITEM_TRACK_LIST[cycleIndex];
 
   try {
     page = await browser.newPage();
