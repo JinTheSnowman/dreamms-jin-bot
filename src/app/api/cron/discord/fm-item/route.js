@@ -89,7 +89,7 @@ export async function GET(request) {
     await page.type('[role="textbox"][contenteditable="true"]', queryString);
     await page.keyboard.press("Enter");
 
-    const queryTime = Date.now();
+    const snapshotAt = Date.now();
 
     console.log("Query sent, waiting for network...");
 
@@ -134,7 +134,7 @@ export async function GET(request) {
       return { name, itemId, listings };
     });
 
-    const data = { queryTime, ...listingData };
+    const data = { snapshotAt, ...listingData };
 
     console.log("Data extracted:", data);
 
