@@ -7,7 +7,9 @@ const FREQUENCY = 10;
 
 // const DISCORD_URL = "https://discord.com/channels/@me/1264454944354734100";s
 // const DISCORD_URL = "https://discord.com/channels/@me/1349534535175508018";
-const DISCORD_URL = "https://discord.com/channels/@me/1345039358696095875";
+// const DISCORD_URL = "https://discord.com/channels/@me/1345039358696095875";
+
+const DISCORD_URL = "https://discord.com/channels/1272089665247248486/1281128580377477225"
 
 export const maxDuration = 300;
 
