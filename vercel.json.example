@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/discord/fm-item",
-      "schedule": "*/10 * * * *"
+      "schedule": "0 * * * *"
     }
   ]
 }
