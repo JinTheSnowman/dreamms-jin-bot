@@ -123,9 +123,10 @@ export async function GET(request) {
         let match;
         while ((match = regex.exec(desc.innerText)) !== null) {
           listings.push({
-            price: match[1].replaceAll(",", ""),
+            price: parseInt(match[1].replaceAll(",", "")),
             qty: parseInt(match[2], 10),
             seller: match[3],
+            processed: false,
           });
         }
       });
