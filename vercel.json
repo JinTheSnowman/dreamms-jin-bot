@@ -1,1 +1,9 @@
-{}
+{
+    "crons": [
+      {
+        "path": "/api/cron/discord/fm-item",
+        "schedule": "*/45 * * * *"
+      }
+    ]
+  }
+  

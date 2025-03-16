@@ -10,10 +10,9 @@ const ITEM_TRACK_LIST = process.env.ITEM_TRACK_LIST || [
   "stone tiger head",
   "white scroll",
   "chaos scroll",
-  "clean slate scroll 10%",
-  "clean slate scroll 20%",
+  "rock of time",
 ];
-const FREQUENCY = 10;
+const FREQUENCY = 45;
 
 const CHROMIUM_EXECUTABLE_URL =
   "https://github.com/Sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar";
